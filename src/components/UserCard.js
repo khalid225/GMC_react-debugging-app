@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 
 function UserCard(props) {
 	// Issue: Trying to access user data using an incorrect prop name
-	const user = props.userData; // <-- Look closely here
+	const user = props.userData; 
 
 	if (!user) {
 		return <p>No user data available.</p>;
