@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { Button, Container } from "react-bootstrap";
+import UserCard from "./components/UserCard";
+import Counter from "./components/Counter";
+import usersData from "./users";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showUsers: false, // State to toggle user list visibility
+			// Issue: Initial state value might be unexpected
+			appStartTime: Date.now(), // <-- Look closely here
+		};
+		this.toggleUsers = this.toggleUsers.bind(this);
+	}
+
+	componentDidMount() {
+		console.log("App component mounted.");
+	}
+
+	componentWillUnmount() {
+		console.log("App component will unmount.");
+	}
+
+	toggleUsers() {
+		this.setState((prevState) => ({
+			showUsers: !prevState.showUsers,
+		}));
+	}
+
+	render() {
+		const { showUsers, appStartTime } = this.state;
+
+		return (
+			<Container className="App mt-5">
+				<h1 className="text-center mb-4">React Debugging Exercise</h1>
+
+				<div className="text-center mb-4">
+					<Button onClick={this.toggleUsers} variant="primary">
+						{showUsers ? "Hide Users" : "Show Users"}
+					</Button>
+				</div>
+
+				{showUsers && (
+					<div className="user-list-container">
+						{/* Issue: Missing 'key' prop when mapping list items */}
+						{usersData.map((user) => (
+							// Issue: Passing user data with a different prop name than expected by UserCard
+							<UserCard personData={user} />
+						))}
+					</div>
+				)}
+
+				<Counter />
+
+				<div className="mt-4 text-center">
+					<p>App started at: {new Date(appStartTime).toLocaleTimeString()}</p>
+				</div>
+			</Container>
+		);
+	}
 }
 
 export default App;
