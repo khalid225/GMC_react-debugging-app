@@ -1,13 +1,12 @@
-// src/components/Counter.js
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
 function Counter() {
-	// State for the counter
 	const [count, setCount] = useState(0);
 
 	const increment = () => {
-		setCount(count + 1); 
+		// Issue: Incorrect way to update state based on previous state
+		setCount(count + 1); // <-- Look closely here
 	};
 
 	return (
