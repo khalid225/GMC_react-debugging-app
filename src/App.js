@@ -10,9 +10,8 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showUsers: false, // State to toggle user list visibility
-			// Issue: Initial state value might be unexpected
-			appStartTime: Date.now(), // <-- Look closely here
+			showUsers: false, 
+			appStartTime: Date.now(), 
 		};
 		this.toggleUsers = this.toggleUsers.bind(this);
 	}
@@ -46,9 +45,7 @@ class App extends Component {
 
 				{showUsers && (
 					<div className="user-list-container">
-						{/* Issue: Missing 'key' prop when mapping list items */}
 						{usersData.map((user) => (
-							// Issue: Passing user data with a different prop name than expected by UserCard
 							<UserCard personData={user} />
 						))}
 					</div>

@@ -7,8 +7,7 @@ function Counter() {
 	const [count, setCount] = useState(0);
 
 	const increment = () => {
-		// Issue: Incorrect way to update state based on previous state
-		setCount(count + 1); // <-- Look closely here
+		setCount(count + 1); 
 	};
 
 	return (
